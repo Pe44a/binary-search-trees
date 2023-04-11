@@ -27,15 +27,66 @@ class Tree {
         return root;
     }
 
+
+    insert(data, root = this.root) {
+
+        // If the tree is empty, return a new node
+        if (root == null) {
+            root = new Node(data);
+            return root;
+        }
+ 
+        // Otherwise, recur down the tree
+        if (data < root.data)
+            root.leftChild = this.insert(data, root.leftChild);
+        else if (data > root.data)
+            root.rightChild = this.insert(data, root.rightChild);
+ 
+        // return the (unchanged) node pointer
+        return root;
+    }
+
+
+    delete(data, root = this.root) {
+        //Base Case: If the tree is empty
+        if (root == null)
+            return root;
+  
+        //Otherwise, recur down the tree
+        if (data < root.data) {
+            root.leftChild = this.delete(data, root.leftChild);
+            
+        } else if (data > root.data) {
+            root.rightChild = this.delete(data, root.rightChild);
+        }
+  
+
+        // Deletes node whose value is same as data
+        else {
+            // node with only one child or no child
+            if (root.leftChild == null) {
+                return root.rightChild;
+            
+            }else if (root.rightChild == null) {
+                return root.leftChild;
+            }
+
+
+            // finds and returns the minimum value present in a binary search tree
+            const minValue = (rootNode) => rootNode.leftChild ? minValue(rootNode.leftChild) : rootNode.data;
+
+            
+            // node with two children: Get the inorder
+            root.data = minValue(root.rightChild) ;
+            root.rightChild = this.delete(root.data, root.rightChild);
+        }
+  
+        return root;
+    }
 }
 
 
-const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-
-
-const tree = new Tree(array);
-
-
+// visualizes binary search tree
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
      return;
@@ -48,4 +99,19 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     prettyPrint(node.leftChild, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
 }
+
+
+const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+
+
+const tree = new Tree(array);
+
+tree.insert(32);
+
+tree.delete(4);
+
+
+prettyPrint(tree.root);
+
+
 
