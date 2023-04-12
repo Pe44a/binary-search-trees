@@ -30,13 +30,13 @@ class Tree {
 
     insert(data, root = this.root) {
 
-        // If the tree is empty, return a new node
+        // if the tree is empty, return a new node
         if (root == null) {
             root = new Node(data);
             return root;
         }
  
-        // Otherwise, recur down the tree
+        // otherwise, recur down the tree
         if (data < root.data)
             root.leftChild = this.insert(data, root.leftChild);
         else if (data > root.data)
@@ -48,11 +48,11 @@ class Tree {
 
 
     delete(data, root = this.root) {
-        //Base Case: If the tree is empty
+        //base Case: If the tree is empty
         if (root == null)
             return root;
   
-        //Otherwise, recur down the tree
+        //otherwise, recur down the tree
         if (data < root.data) {
             root.leftChild = this.delete(data, root.leftChild);
             
@@ -61,7 +61,7 @@ class Tree {
         }
   
 
-        // Deletes node whose value is same as data
+        // deletes node whose value is same as data
         else {
             // node with only one child or no child
             if (root.leftChild == null) {
@@ -82,6 +82,31 @@ class Tree {
         }
   
         return root;
+    }
+
+
+
+    find(data, root = this.root) {
+
+        if (root == null) return null;
+        
+        // returns if there is requested data
+        if(data === root.data) {
+            return root;
+        }
+        
+          // searches through BST
+          if(root.leftChild !== null && root.rightChild !== null) {
+            const leftResult = this.find(data, root.leftChild);
+            const rightResult = this.find(data, root.rightChild);
+                return leftResult || rightResult; // return either result if found
+
+          } else if(root.leftChild !== null) {
+            return this.find(data, root.leftChild);
+
+          }else {
+            return this.find(data, root.rightChild);
+          }
     }
 }
 
@@ -106,12 +131,17 @@ const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 
 const tree = new Tree(array);
 
+
 tree.insert(32);
 
 tree.delete(4);
 
+tree.find(67);
 
 prettyPrint(tree.root);
+
+
+
 
 
 
