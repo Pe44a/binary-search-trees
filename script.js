@@ -108,6 +108,33 @@ class Tree {
             return this.find(data, root.rightChild);
           }
     }
+
+
+
+    // traverses the tree in breadth-first level order
+    // and provide each node as the argument to the provided function.
+    // method returns an array of values if no function is given
+    levelOrder(func, root = this.root) {
+      if(root === null) return;
+      const queue = [];
+      const array = [];
+      queue.unshift(root);
+
+      // while at least there is one node
+      while(queue.length !== 0){
+        const current = queue[queue.length - 1];
+
+        if(current.leftChild !== null){ queue.unshift(current.leftChild) };
+        if(current.rightChild !== null){ queue.unshift(current.rightChild) };
+
+
+
+        !func ? array.push(current) : func(current); // pushing a value into an array or calling a function
+        queue.pop(); // removes element at front
+      }
+
+      if(!func) return array;
+    }
 }
 
 
