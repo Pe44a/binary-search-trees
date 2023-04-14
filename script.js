@@ -135,6 +135,62 @@ class Tree {
 
       if(!func) return array;
     }
+
+
+    //functions traverse the tree in preorder
+    //yields each node to the provided function given as an argument
+    //return an array of values if no function is given
+    preorder(func, root = this.root, array = []) {
+      if(root === null) return;
+
+      array.push(root);
+
+      if(func) func(root);
+
+      this.preorder(func, root.leftChild, array);
+      this.preorder(func, root.rightChild, array);
+
+      if(!func) return array;
+    }
+
+
+    //functions traverse the tree in inorder
+    //yields each node to the provided function given as an argument
+    //return an array of values if no function is given
+    inorder(func, root = this.root, array = []) {
+      if(root === null) return;
+
+      
+      if(func) func(root);
+
+      this.inorder(func, root.leftChild, array);
+
+      array.push(root);
+      
+      this.inorder(func, root.rightChild, array);
+
+
+      if(!func) return array;
+    }
+
+
+    //functions traverse the tree in postorder
+    //yields each node to the provided function given as an argument
+    //return an array of values if no function is given
+    postorder(func, root = this.root, array = []) {
+      if(root === null) return;
+
+      
+      if(func) func(root);
+
+      this.postorder(func, root.leftChild, array);
+      this.postorder(func, root.rightChild, array);
+
+      array.push(root);
+
+
+      if(!func) return array;
+    }
 }
 
 
