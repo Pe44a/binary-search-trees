@@ -191,6 +191,27 @@ class Tree {
 
       if(!func) return array;
     }
+
+
+
+    // accepts a node and returns its height
+    height(root = this.root) {
+       // Get the height of the tree
+    if (!root)
+      return 0;
+
+    else {
+    // Find the height of both subtrees
+    // and use the larger one
+    const leftHeight = this.height(root.leftChild);
+    const rightHeight = this.height(root.rightChild);
+
+      if (leftHeight >= rightHeight)
+          return leftHeight + 1;
+      else
+          return rightHeight + 1;
+      }
+    }
 }
 
 
