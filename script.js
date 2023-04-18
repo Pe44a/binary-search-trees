@@ -6,6 +6,9 @@ class Node {
   }
 }
 
+
+
+
 class Tree {
     constructor(array) {
         // filters duplicates
@@ -195,16 +198,16 @@ class Tree {
 
 
     // accepts a node and returns its height
-    height(root = this.root) {
-       // Get the height of the tree
-    if (!root)
+    height(node = this.root) {
+    // Get the height of the tree
+    if (!node)
       return 0;
 
     else {
     // Find the height of both subtrees
     // and use the larger one
-    const leftHeight = this.height(root.leftChild);
-    const rightHeight = this.height(root.rightChild);
+    const leftHeight = this.height(node.leftChild);
+    const rightHeight = this.height(node.rightChild);
 
       if (leftHeight >= rightHeight)
           return leftHeight + 1;
@@ -212,7 +215,26 @@ class Tree {
           return rightHeight + 1;
       }
     }
+
+
+    // accepts a node and returns its depth
+    // Depth is defined as the number of edges in path
+    // from a given node to the tree’s root node
+    // starts to count from 1
+    depth(node, root = this.root, level = 1) {
+      if(root === null) return;
+      if(root === node) return level;
+
+
+      const left = this.depth(node, root.leftChild, level + 1);
+      const right = this.depth(node, root.rightChild, level + 1);
+
+      return left || right;
+    }
+
 }
+
+
 
 
 // visualizes binary search tree
