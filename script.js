@@ -232,6 +232,30 @@ class Tree {
       return left || right;
     }
 
+
+    // checks if the tree is balanced
+    isBalanced(root = this.root){
+     
+      // Base condition
+      if(root == null){
+          return true;
+      }
+   
+      // for left and right subtree height
+      let leftHeight = this.height(root.leftChild)
+      let rightHeight = this.height(root.rightChild)
+   
+      // allowed values for (lh - rh) are 1, -1, 0
+      if (Math.abs(leftHeight - rightHeight) <= 1 && this.isBalanced(
+      root.leftChild)== true && this.isBalanced( root.rightChild) == true){
+          return true;
+      }
+
+
+      return false;
+  }
+ 
+
 }
 
 
@@ -257,12 +281,6 @@ const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 
 const tree = new Tree(array);
 
-
-tree.insert(32);
-
-tree.delete(4);
-
-tree.find(67);
 
 prettyPrint(tree.root);
 
