@@ -132,7 +132,7 @@ class Tree {
 
 
 
-        !func ? array.push(current) : func(current); // pushing a value into an array or calling a function
+        !func ? array.push(current.data) : func(current); // pushing a value into an array or calling a function
         queue.pop(); // removes element at front
       }
 
@@ -146,7 +146,7 @@ class Tree {
     preorder(func, root = this.root, array = []) {
       if(root === null) return;
 
-      array.push(root);
+      array.push(root.data);
 
       if(func) func(root);
 
@@ -168,7 +168,7 @@ class Tree {
 
       this.inorder(func, root.leftChild, array);
 
-      array.push(root);
+      array.push(root.data);
       
       this.inorder(func, root.rightChild, array);
 
@@ -189,7 +189,7 @@ class Tree {
       this.postorder(func, root.leftChild, array);
       this.postorder(func, root.rightChild, array);
 
-      array.push(root);
+      array.push(root.data);
 
 
       if(!func) return array;
@@ -253,6 +253,15 @@ class Tree {
 
 
       return false;
+  }
+
+
+  // rebalances an unbalanced tree
+  rebalance() {
+    const bst = this.inorder();
+
+    this.array = bst;
+    this.root = this.buildTree();
   }
  
 
