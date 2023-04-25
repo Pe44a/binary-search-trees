@@ -293,7 +293,7 @@ function driverScript(array) {
 
 
   // checks if balanced
-  console.log('Is it balanced: ' + tree.isBalanced());
+  console.log('---------------------------' + '<br>' + 'Is it balanced: ' + tree.isBalanced());
 
   // Prints out all elements in level, pre, post, and in order
   console.log('Preorder: ' + tree.preorder());
@@ -312,14 +312,14 @@ function driverScript(array) {
 
 
   // checks if unbalanced
-  console.log('Is it balanced: ' + tree.isBalanced());
+  console.log('---------------------------' + '<br>' + 'Is it balanced: ' + tree.isBalanced());
 
   prettyPrint(tree.root);
 
 
   tree.rebalance();
 
-  console.log('Is it balanced: ' + tree.isBalanced());
+  console.log('---------------------------' + '<br>' + 'Is it balanced: ' + tree.isBalanced());
 
   prettyPrint(tree.root);
 
