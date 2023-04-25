@@ -4,10 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BST</title>
 </head>
 <body>
-    
+    <div id="console-output"></div>
+    <label for="console-input">Console Input:</label>
+    <input type="text" id="console-input">
+    <button onclick="executeConsoleCommand()">Execute</button>
+
+    <script>
+      // Function to execute console commands entered by the user
+      function executeConsoleCommand() {
+        var consoleInput = document.getElementById('console-input').value;
+        eval(consoleInput);
+      }
+
+      // Override console.log() to display output in the HTML page
+      (function () {
+        var oldConsoleLog = console.log;
+        console.log = function (message) {
+          oldConsoleLog.apply(console, arguments);
+          var consoleOutput = document.getElementById('console-output');
+          consoleOutput.innerHTML += '<pre>' + message + '</pre>';
+        };
+      })();
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

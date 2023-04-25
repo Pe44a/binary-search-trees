@@ -285,16 +285,54 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 
+
+// Creates a binary search tree from an array of random numbers
+// Then checks various parameters
+function driverScript(array) {
+  const tree =new Tree(array);
+
+
+  // checks if balanced
+  console.log('Is it balanced: ' + tree.isBalanced());
+
+  // Prints out all elements in level, pre, post, and in order
+  console.log('Preorder: ' + tree.preorder());
+  console.log('Inorder: ' + tree.inorder());
+  console.log('Postorder: ' + tree.postorder());
+
+  prettyPrint(tree.root);
+
+
+  // Unbalances the tree by adding several numbers
+  tree.insert(21);
+  tree.insert(78);
+  tree.insert(84);
+  tree.insert(98);
+  tree.insert(11);
+
+
+  // checks if unbalanced
+  console.log('Is it balanced: ' + tree.isBalanced());
+
+  prettyPrint(tree.root);
+
+
+  tree.rebalance();
+
+  console.log('Is it balanced: ' + tree.isBalanced());
+
+  prettyPrint(tree.root);
+
+  
+  // Prints out all elements in level, pre, post, and in order
+  console.log('Preorder: ' + tree.preorder());
+  console.log('Inorder: ' + tree.inorder());
+  console.log('Postorder: ' + tree.postorder());
+}
+
+
+
+
 const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 
-
-const tree = new Tree(array);
-
-
-prettyPrint(tree.root);
-
-
-
-
-
-
+driverScript(array);
